@@ -1,0 +1,50 @@
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label class="form-label fw-bold">Título do Livro</label>
+      <input type="text" class="form-control" formControlName="titulo" 
+             [ngClass]="{'is-invalid': form.get('titulo')?.invalid && form.get('titulo')?.touched}">
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label class="form-label fw-bold">Editora</label>
+      <input type="text" class="form-control" formControlName="editora">
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label class="form-label fw-bold">Edição</label>
+      <input type="number" class="form-control" formControlName="edicao">
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label class="form-label fw-bold">Ano (YYYY)</label>
+      <input type="text" class="form-control" formControlName="anoPublicacao" maxlength="4">
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label class="form-label fw-bold">Autores (Ctrl + clique)</label>
+      <select multiple class="form-select" formControlName="autoresIds" style="height: 120px;">
+        <option *ngFor="let autor of listaAutores" [value]="autor.codAu">
+          {{ autor.nome }}
+        </option>
+      </select>
+      <small class="text-muted" *ngIf="listaAutores.length === 0">Nenhum autor cadastrado.</small>
+    </div>
+
+    <div class="col-md-6 mb-3">
+  <label class="form-label fw-bold">Assuntos (Ctrl + clique)</label>
+  <select multiple class="form-select" formControlName="assuntosIds" style="height: 120px;">
+    <option *ngFor="let assunto of listaAssuntos" [value]="assunto.codAs">
+      {{ assunto.descricao }}
+    </option>
+  </select>
+  <small class="text-muted" *ngIf="listaAssuntos.length === 0">Nenhum assunto cadastrado.</small>
+</div>
+  </div>
+
+  <div class="d-grid gap-2 mt-3">
+    <button type="submit" class="btn text-white" style="background-color: #2C4C7E;" [disabled]="form.invalid">
+      <i class="bi bi-check-lg me-1"></i> Salvar Livro
+    </button>
+  </div>
+</form>
