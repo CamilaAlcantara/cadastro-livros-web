@@ -18,26 +18,9 @@ export class RelatorioService {
     return this.http.get<RelatorioLivroPorAutor[]>(`${this.API}/relatorios/livros-por-autor/dados`);
   }
 
-  downloadPdfRelatorio(): void {
+
+downloadPdfRelatorio(): Observable<Blob> {
     const url = `${this.API}/relatorios/livros-por-autor`;
-    
-    
-    this.http.get(url, { responseType: 'blob' })
-      .subscribe({
-        next: (blob) => {
-          const downloadUrl = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = downloadUrl;
-          link.download = 'relatorio-livros-por-autor.pdf'; 
-          link.click();
-          
-          // Limpa a memória
-          window.URL.revokeObjectURL(downloadUrl);
-        },
-        error: (erro) => {
-          console.error('Erro ao baixar PDF', erro);
-          alert('Erro ao gerar o PDF. Verifique o console.');
-        }
-      });
+   return this.http.get(url, { responseType: 'blob' });
   }
 }
