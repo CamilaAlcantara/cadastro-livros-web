@@ -1,8 +1,8 @@
 export interface AutorResponse {
-  codAu?: number;
-  nome?: string;
+  codAu: number;
+  nome: string;
 }
 
 export interface AutorRequest {
-  nome?: string;
+  nome: string;
 }

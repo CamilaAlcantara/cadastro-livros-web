@@ -1,0 +1,33 @@
+<div *ngIf="mensagem" 
+     class="alert d-flex align-items-center fade show" 
+     [ngClass]="'alert-' + tipoAlert" 
+     role="alert">
+  
+  <i class="bi me-2" 
+     [ngClass]="tipoAlert === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+  
+  <div>
+    {{ mensagem }}
+  </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <div class="mb-3">
+    <label class="form-label fw-bold">Nome do Autor</label>
+    <input type="text" class="form-control" formControlName="nome" 
+           placeholder="Ex: Machado de Assis"
+           [ngClass]="{'is-invalid': form.get('nome')?.invalid && form.get('nome')?.touched}">
+    
+    <div class="invalid-feedback">
+      O nome é obrigatório (mínimo 3 letras).
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn text-white" 
+            style="background-color: #2C4C7E;" 
+            [disabled]="form.invalid">
+      <i class="bi bi-check-lg me-1"></i> Salvar Autor
+    </button>
+  </div>
+</form>
