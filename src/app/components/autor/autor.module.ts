@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AutorRoutingModule,
-    ReactiveFormsModule // 
+    ReactiveFormsModule 
   ]
 })
 export class AutorModule { }

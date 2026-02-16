@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <div class="mb-3">
+    <label class="form-label fw-bold">Descrição do Assunto</label>
+    <input type="text" class="form-control" formControlName="descricao" 
+           placeholder="Ex: Romance, Tecnologia, Didático"
+           [ngClass]="{'is-invalid': form.get('descricao')?.invalid && form.get('descricao')?.touched}">
+    
+    <div class="invalid-feedback">
+      A descrição é obrigatória (mínimo 3 caracteres).
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn text-white" 
+            style="background-color: #2C4C7E;" 
+            [disabled]="form.invalid">
+      <i class="bi bi-save me-1"></i> Salvar Assunto
+    </button>
+  </div>
+</form>
