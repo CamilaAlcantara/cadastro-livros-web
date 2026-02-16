@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/scss/bootstrap";
+
+/* Paleta de Cores Personalizada */
+.bg-primary-custom { background-color: #2C4C7E !important; }
+.bg-dark-custom { background-color: #343A40 !important; }
+.btn-primary-custom { 
+  background-color: #2C4C7E; 
+  border-color: #2C4C7E;
+  color: #fff;
+  &:hover { background-color: #1a3c6e; }
+}
+
+/* Ajuste de Foco dos Inputs */
+.form-control:focus, .form-select:focus {
+  border-color: #2C4C7E;
+  box-shadow: 0 0 0 0.2rem rgba(44, 76, 126, 0.25);
+}
