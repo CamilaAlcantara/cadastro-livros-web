@@ -1,8 +1,8 @@
 export interface AssuntoResponse {
-  codAs?: number;
-  descricao?: string;
+  codAs: number;
+  descricao: string;
 }
 
 export interface AssuntoRequest {
-  descricao?: string;
+  descricao: string;
 }

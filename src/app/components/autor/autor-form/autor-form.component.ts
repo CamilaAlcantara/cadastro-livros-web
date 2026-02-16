@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutorService } from 'src/app/services/autor.service';
+import { AlertaService } from 'src/app/services/alerta.service'; // Novo Import
 import { AutorRequest, AutorResponse } from 'src/app/models/autor';
 
 @Component({
@@ -13,11 +14,12 @@ export class AutorFormComponent implements OnChanges {
   @Output() aoSalvar = new EventEmitter<void>();
   
   form: FormGroup;
-  
-  mensagem: string | null = null;
-  tipoAlert: 'success' | 'danger' | 'warning' = 'success';
 
-  constructor(private fb: FormBuilder, private service: AutorService) {
+  constructor(
+    private fb: FormBuilder, 
+    private service: AutorService,
+    public alerta: AlertaService // Mantenha público para o Service funcionar globalmente
+  ) {
     this.form = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]]
     });
@@ -31,15 +33,6 @@ export class AutorFormComponent implements OnChanges {
     }
   }
 
-  private exibirMensagem(msg: string, tipo: 'success' | 'danger' | 'warning') {
-    this.mensagem = msg;
-    this.tipoAlert = tipo;
-    
-    setTimeout(() => {
-      this.mensagem = null;
-    }, 3000);
-  }
-
   salvar() {
     if (this.form.invalid) return;
     const request: AutorRequest = this.form.value;
@@ -47,19 +40,19 @@ export class AutorFormComponent implements OnChanges {
     if (this.autorParaEditar) {
       this.service.atualizar(this.autorParaEditar.codAu, request).subscribe({
         next: () => {
-          this.exibirMensagem('Autor alterado com sucesso!', 'success');
-          setTimeout(() => this.aoSalvar.emit(), 3500); // Aguarda um pouco para fechar
+          this.alerta.exibir('Autor alterado com sucesso!', 'success'); 
+          setTimeout(() => this.aoSalvar.emit(), 200); 
         },
-        error: () => this.exibirMensagem('Erro ao atualizar autor.', 'danger')
+        error: () => this.alerta.exibir('Erro ao atualizar autor.', 'danger')
       });
     } else {
       this.service.incluir(request).subscribe({
         next: () => {
-          this.exibirMensagem('Autor cadastrado com sucesso!', 'success');
+          this.alerta.exibir('Autor cadastrado com sucesso!', 'success');
           this.form.reset();
-          setTimeout(() => this.aoSalvar.emit(), 1500);
+          setTimeout(() => this.aoSalvar.emit(), 200);
         },
-        error: () => this.exibirMensagem('Erro ao cadastrar autor.', 'danger')
+        error: () => this.alerta.exibir('Erro ao cadastrar autor.', 'danger')
       });
     }
   }
