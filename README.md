@@ -123,5 +123,5 @@ A comunicação com o backend é realizada via `HttpClient`, centralizada em ser
 ---
 
 ## 📬 Contato
-
-E-mail: camila.m.a.alcantara@gmail.com
+Desenvolvido por **Camila Alcantara**  
+📧 E-mail: camila.m.a.alcantara@gmail.com
