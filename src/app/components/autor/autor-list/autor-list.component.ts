@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutorService } from 'src/app/services/autor.service';
 import { AlertaService } from 'src/app/services/alerta.service'; // Importe o serviço
 import { AutorResponse } from 'src/app/models/autor';
+import { AutorFormComponent } from '../autor-form/autor-form.component';
 
 declare var bootstrap: any;
 
@@ -17,6 +18,8 @@ export class AutorListComponent implements OnInit {
   private modalInstance: any;
   autorParaExcluir: AutorResponse | null = null;
   private modalConfirmacaoInstance: any;
+  
+  @ViewChild(AutorFormComponent) formularioAutor!: AutorFormComponent;
 
   constructor(
     private service: AutorService,
@@ -39,6 +42,9 @@ export class AutorListComponent implements OnInit {
 
   novoAutor() {
     this.autorSelecionado = null; 
+    if (this.formularioAutor) {
+      this.formularioAutor.form.reset();
+    }
     this.abrirModal();
   }
 

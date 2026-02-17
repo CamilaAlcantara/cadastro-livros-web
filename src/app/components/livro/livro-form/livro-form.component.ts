@@ -7,10 +7,14 @@ import { AlertaService } from 'src/app/services/alerta.service';
 import { LivroResponse, LivroRequest } from 'src/app/models/livro';
 import { AutorResponse } from 'src/app/models/autor';
 import { AssuntoResponse } from 'src/app/models/assunto';
+import { Router } from '@angular/router';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-livro-form',
-  templateUrl: './livro-form.component.html'
+  templateUrl: './livro-form.component.html',
+  styleUrls: ['./livro-form.component.scss']
 })
 export class LivroFormComponent implements OnInit, OnChanges {
   @Input() livroParaEditar: LivroResponse | null = null;
@@ -19,12 +23,14 @@ export class LivroFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   listaAutores: AutorResponse[] = [];
   listaAssuntos: AssuntoResponse[] = [];
+  
 
   constructor(
     private fb: FormBuilder,
     private service: LivroService,
     private autorService: AutorService,
     private assuntoService: AssuntoService,
+    private router: Router,
     public alerta: AlertaService
   ) {
     this.form = this.fb.group({
@@ -32,6 +38,7 @@ export class LivroFormComponent implements OnInit, OnChanges {
       editora: ['', [Validators.required]],
       edicao: [1, [Validators.required, Validators.min(1)]],
       anoPublicacao: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]],
+      valor: [null, [Validators.required, Validators.min(0)]],
       autoresIds: [[], [Validators.required]],
       assuntosIds: [[], [Validators.required]]
     });
@@ -40,6 +47,24 @@ export class LivroFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.carregarAuxiliares();
   }
+
+  navegarParaAutores() {
+    this.limparModalEIrPara('/autores');
+  }
+
+  navegarParaAssuntos() {
+    this.limparModalEIrPara('/assuntos');
+  }
+
+  private limparModalEIrPara(rota: string) {
+  const modalElement = document.getElementById('modalLivro');
+  
+  if (modalElement) {
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    modalInstance?.hide();
+  }
+  this.router.navigate([rota]);
+}
 
   carregarAuxiliares() {
     this.autorService.listar().subscribe(res => this.listaAutores = res);
@@ -63,7 +88,7 @@ export class LivroFormComponent implements OnInit, OnChanges {
 
     const request: LivroRequest = this.form.value;
     const operacao = this.livroParaEditar
-      ? this.service.atualizar(this.livroParaEditar.codl, request)
+      ? this.service.atualizar(this.livroParaEditar.codL, request)
       : this.service.incluir(request);
 
     operacao.subscribe({

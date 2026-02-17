@@ -69,7 +69,7 @@ export class LivroListComponent implements OnInit {
 
   confirmarExclusao() {
     if (this.livroParaExcluir) {
-      this.service.deletar(this.livroParaExcluir.codl).subscribe({
+      this.service.deletar(this.livroParaExcluir.codL).subscribe({
         next: () => {
           this.modalConfirmacaoInstance.hide(); 
           this.carregarLivros(); 

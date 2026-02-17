@@ -6,39 +6,68 @@
              [ngClass]="{'is-invalid': form.get('titulo')?.invalid && form.get('titulo')?.touched}">
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-12 mb-3">
       <label class="form-label fw-bold">Editora</label>
       <input type="text" class="form-control" formControlName="editora">
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-3">
       <label class="form-label fw-bold">Edição</label>
       <input type="number" class="form-control" formControlName="edicao">
     </div>
 
-    <div class="col-md-3 mb-3">
-      <label class="form-label fw-bold">Ano (YYYY)</label>
+    <div class="col-md-4 mb-3">
+      <label class="form-label fw-bold">Ano 
+        <i class="bi bi-info-circle-fill ms-2 help-text"
+          data-bs-toggle="tooltip" 
+          title="Digite o ano de publicação com 4 dígitos. Ex: 2007."></i>
+      </label>
       <input type="text" class="form-control" formControlName="anoPublicacao" maxlength="4">
     </div>
 
+    <div class="col-md-4 mb-3">
+      <label class="form-label fw-bold">Valor (R$)</label>
+      <input type="number" class="form-control" formControlName="valor" placeholder="0.00" step="0.01">
+    </div>
+
     <div class="col-md-6 mb-3">
-      <label class="form-label fw-bold">Autores (Ctrl + clique)</label>
+      <label class="form-label fw-bold">Autores 
+        <i class="bi bi-info-circle-fill ms-2 help-text"
+          data-bs-toggle="tooltip" 
+          title="Mantenha o CTRL pressionado para selecionar múltiplos autores"></i>
+      </label>
       <select multiple class="form-select" formControlName="autoresIds" style="height: 120px;">
         <option *ngFor="let autor of listaAutores" [value]="autor.codAu">
           {{ autor.nome }}
         </option>
       </select>
       <small class="text-muted" *ngIf="listaAutores.length === 0">Nenhum autor cadastrado.</small>
+      <a href="javascript:void(0)" 
+       class="small fw-bold text-decoration-none" 
+       style="color: #2C4C7E;"
+       (click)="navegarParaAutores()">
+       <i class="bi bi-plus-circle me-1"></i>Não encontrou o autor? Cadastre aqui
+    </a>
     </div>
 
     <div class="col-md-6 mb-3">
-  <label class="form-label fw-bold">Assuntos (Ctrl + clique)</label>
+  <label class="form-label fw-bold">Assuntos
+    <i class="bi bi-info-circle-fill ms-2 help-text"
+          data-bs-toggle="tooltip" 
+          title="Mantenha o CTRL pressionado para selecionar múltiplos assuntos"></i>
+  </label>
   <select multiple class="form-select" formControlName="assuntosIds" style="height: 120px;">
     <option *ngFor="let assunto of listaAssuntos" [value]="assunto.codAs">
       {{ assunto.descricao }}
     </option>
   </select>
   <small class="text-muted" *ngIf="listaAssuntos.length === 0">Nenhum assunto cadastrado.</small>
+  <a href="javascript:void(0)" 
+       class="small fw-bold text-decoration-none" 
+       style="color: #2C4C7E;"
+       (click)="navegarParaAssuntos()">
+       <i class="bi bi-plus-circle me-1"></i>Não encontrou o assunto? Cadastre aqui
+  </a>
 </div>
   </div>
 

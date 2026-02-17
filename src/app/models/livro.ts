@@ -2,7 +2,7 @@ import { AutorResponse } from "./autor";
 import { AssuntoResponse } from "./assunto";
 
 export interface LivroResponse {
-  codl: number;
+  codL: number;
   titulo: string;
   editora: string;
   edicao: number;

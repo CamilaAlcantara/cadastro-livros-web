@@ -31,6 +31,7 @@ export class AssuntoFormComponent implements OnChanges {
     op.subscribe({
       next: () => {
         this.alerta.exibir('Sucesso!', 'success');
+        this.form.reset();
         setTimeout(() => this.aoSalvar.emit(), 200);
       },
       error: () => this.alerta.exibir('Erro ao salvar.', 'danger')

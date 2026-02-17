@@ -5,7 +5,7 @@
            placeholder="Ex: Machado de Assis"
            [ngClass]="{'is-invalid': form.get('nome')?.invalid && form.get('nome')?.touched}">
     
-    <div class="invalid-feedback">
+    <div class="invalid-feedback" *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
       O nome é obrigatório (mínimo 3 letras).
     </div>
   </div>

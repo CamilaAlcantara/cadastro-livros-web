@@ -5,14 +5,12 @@
       <i class="bi bi-journal-bookmark-fill me-2"></i>Catálogo de Livros
     </h5>
     <div class="d-flex gap-2">
-        <button class="btn btn-light btn-sm fw-bold" 
-                style="color: #2C4C7E;" 
+        <button class="btn btn-light btn-sm fw-bold"  
                 (click)="imprimirRelatorio()">
             <i class="bi bi-file-pdf me-1"></i> Gerar Relatório
         </button>
         
         <button class="btn btn-light btn-sm fw-bold" 
-                style="color: #2C4C7E;" 
                 (click)="novoLivro()">
             <i class="bi bi-plus-lg me-1"></i> Novo Livro
         </button>
@@ -27,6 +25,7 @@
             <th class="ps-4">Título</th>
             <th>Editora</th>
             <th class="text-center">Ano</th>
+            <th class="text-center">Valor</th>
             <th>Autores</th>
             <th>Assuntos</th>
             <th class="text-center" style="width: 15%;">Ações</th>
@@ -34,9 +33,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of livros">
-            <td class="ps-4 fw-bold" style="color: #2C4C7E;">{{ item.titulo }}</td>
+            <td class="ps-4 ">{{ item.titulo }}</td>
             <td>{{ item.editora }} ({{ item.edicao }}ª ed.)</td>
             <td class="text-center">{{ item.anoPublicacao }}</td>
+            <td class="text-center ">
+              {{ item.valor | currency:'BRL':'symbol':'1.2-2' }}
+            </td>
             
             <td>
               <span *ngFor="let autor of item.autores" class="badge bg-secondary me-1">
