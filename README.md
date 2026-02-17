@@ -121,6 +121,11 @@ A comunicação com o backend é realizada via `HttpClient`, centralizada em ser
 - A aplicação segue organização modular para separação de responsabilidades.
 
 ---
+## 🔧 Backend
+
+A API responsável pelos dados está disponível em:
+
+https://github.com/CamilaAlcantara/cadastro-livros-api
 
 ## 📬 Contato
 Desenvolvido por **Camila Alcantara**  
