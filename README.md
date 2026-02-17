@@ -1,27 +1,127 @@
-# LivrosWeb
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+# 📚 Livros Web
 
-## Development server
+Aplicação frontend desenvolvida em **Angular 15 + Bootstrap 5** para gerenciamento de livros, autores e assuntos.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Este projeto consome a API `livros-api`, responsável pelo CRUD das entidades e geração de relatório em PDF.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Tecnologias
 
-## Build
+- Angular 15
+- Bootstrap 5
+- TypeScript
+- HttpClient
+- Reactive Forms
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🌎 Ambiente de Desenvolvimento
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Este projeto foi desenvolvido utilizando:
 
-## Running end-to-end tests
+- Node 18+
+- Angular CLI 15.2.11
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 🔗 Integração com API
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+A aplicação espera que a API esteja rodando em:
+
+```
+http://localhost:8080
+```
+
+Caso necessário, altere o arquivo:
+
+```
+src/environments/environment.ts
+```
+
+Exemplo:
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080'
+};
+```
+
+---
+
+## ▶️ Como rodar o projeto
+
+### 1️⃣ Instalar dependências
+
+```bash
+npm install
+```
+
+### 2️⃣ Executar
+
+```bash
+ng serve
+```
+
+Acesse no navegador:
+
+```
+http://localhost:4200
+```
+
+---
+
+## 📌 Funcionalidades
+
+- CRUD de Autores
+- CRUD de Assuntos
+- CRUD de Livros
+  - Campo obrigatório **Valor (R$)**
+  - Relacionamento N:N com Autores e Assuntos
+- Geração de relatório em PDF (consumindo endpoint da API)
+
+---
+
+## 🧾 Relatório
+
+O botão **"Gerar Relatório"** realiza chamada ao endpoint:
+
+```
+GET /relatorios/livros-por-autor
+```
+
+O download do PDF é realizado automaticamente pelo navegador.
+
+---
+
+## 🏗️ Estrutura do Projeto
+
+A aplicação está organizada por módulos de domínio:
+
+- `autores/`
+- `assuntos/`
+- `livros/`
+
+Cada módulo possui:
+
+- Componente de listagem
+- Componente de formulário
+- Service responsável pelo consumo da API
+
+A comunicação com o backend é realizada via `HttpClient`, centralizada em services específicos por entidade.
+
+---
+
+## ⚠️ Observações
+
+- O backend deve estar rodando antes de iniciar o frontend.
+- O projeto utiliza Reactive Forms com validação obrigatória para campos essenciais.
+- A aplicação segue organização modular para separação de responsabilidades.
+
+---
+
+## 📬 Contato
+
+E-mail: camila.m.a.alcantara@gmail.com
